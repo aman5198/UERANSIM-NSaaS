@@ -56,7 +56,7 @@ void EncodeRlsMessage(const RlsMessage &msg, OctetString &stream)
 std::unique_ptr<RlsMessage> DecodeRlsMessage(const OctetView &stream)
 {
     auto first = stream.readI(); // (Just for old RLS compatibility)
-    // std::cout << stream.getData(8) << std::endl;
+    std::cout << first << std::endl;
 
     if (first != 3)
         return nullptr;
@@ -71,16 +71,17 @@ std::unique_ptr<RlsMessage> DecodeRlsMessage(const OctetView &stream)
     auto msgType = static_cast<EMessageType>(stream.readI());
     uint64_t sti = stream.read8UL();
 
-    if (first == 49) // condition to create new gnb
-    {
-        std::cout << stream.read() << std::endl;
-        auto res = std::make_unique<RlsHeartBeat>(sti);
-        res->simPos.x = stream.read4I();
-        res->simPos.y = stream.read4I();
-        res->simPos.z = stream.read4I();
-        return res;
-    }
-    else if (msgType == EMessageType::HEARTBEAT)
+    // if (first == 49) // condition to create new gnb
+    // {
+    //     // std::cout << stream.read() << std::endl;
+    //     auto res = std::make_unique<RlsHeartBeat>(sti);
+    //     res->simPos.x = stream.read4I();
+    //     res->simPos.y = stream.read4I();
+    //     res->simPos.z = stream.read4I();
+    //     return res;
+    // }
+    // else 
+    if (msgType == EMessageType::HEARTBEAT)
     {
         auto res = std::make_unique<RlsHeartBeat>(sti);
         res->simPos.x = stream.read4I();
