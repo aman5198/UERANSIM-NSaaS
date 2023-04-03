@@ -33,6 +33,11 @@ class OctetView
         return data[index];
     }
 
+    inline uint8_t getData() const
+    {
+        return *data;
+    }
+
     inline octet peek(int offset) const
     {
         return data[index + offset];

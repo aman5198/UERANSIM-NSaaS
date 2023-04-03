@@ -29,7 +29,7 @@ class secondary_gnb:
 
     def createPacket(self,secondIp,secondPort):
         print("creating packet")
-        packet = "110011"
+        packet = "01010101"
         packet = packet + secondIp + str(secondPort)
         #packet = bytes(packet,encoding='utf-8')
         return packet

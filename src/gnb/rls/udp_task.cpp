@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <cstring>
 #include <set>
+#include<iostream>
 
 #include <gnb/nts.hpp>
 #include <utils/common.hpp>
@@ -81,6 +82,7 @@ void RlsUdpTask::onLoop()
         if (rlsMsg == nullptr)
             m_logger->err("Unable to decode RLS message");
         else
+            //std::cout<<rlsMsg->sti<<std::endl;
             receiveRlsPdu(peerAddress, std::move(rlsMsg));
     }
 }
